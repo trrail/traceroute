@@ -8,7 +8,7 @@ parser.add_argument("--ttl", type=int, help="Enter max ttl", default=30)
 
 
 args = parser.parse_args()
-traceroute = Traceroute(args.hostname, args.ttl)
+traceroute = Traceroute(args.host, args.ttl)
 result = traceroute.make_trace()
 counter = 1
 for i in result:
