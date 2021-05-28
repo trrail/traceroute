@@ -21,7 +21,7 @@ class Traceroute:
             try:
                 data, address = recv_sock.recvfrom(DATA_TO_RECV)
             except socket.timeout:
-                yield 'server_timeout\n'
+                yield '*\n'
                 ttl += 1
                 continue
             whois_data = WhoisTrace().get_whois_data(address[0])
@@ -36,9 +36,8 @@ class Traceroute:
             recv_sock.close()
 
     def create_socks(self, ttl) -> tuple:
-        send_sock = socket.socket(socket.AF_INET, socket.IPPROTO_ICMP, socket.SOCK_DGRAM)
+        send_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_ICMP)
         send_sock.setsockopt(socket.SOL_IP, socket.IP_TTL, ttl)
-        recv_sock = socket.socket(socket.AF_INET,
-                                  socket.IPPROTO_ICMP)
+        recv_sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
         recv_sock.settimeout(4)
         return send_sock, recv_sock

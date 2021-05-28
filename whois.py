@@ -18,10 +18,10 @@ class Whois_Data:
         if 'originas' in whois_data:
             self.auto_sys = whois_data['originas']
 
-    def _make_result_str(self):
+    def __str__(self):
         result = f'{self.address}\n'
         if self.name and not self.auto_sys and not self.country:
-            result += f'{self.name}\n'
+            result += f'local\n'
         elif self.name:
             result += f'{self.name}, '
         if self.auto_sys and not self.country:
@@ -31,9 +31,6 @@ class Whois_Data:
         if self.country:
             result += f'{self.country}\n'
         return result
-
-    def __str__(self):
-        return self._make_result_str()
 
 
 DATA_TO_RECV = 1024

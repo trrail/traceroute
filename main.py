@@ -12,5 +12,5 @@ traceroute = Traceroute(args.host, args.ttl)
 result = traceroute.make_trace()
 counter = 1
 for i in result:
-    print(f'{counter}) {i}')
+    print(f'{counter}. {i}')
     counter += 1
